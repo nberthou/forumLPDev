@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Hutopia{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,800" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <header>
+        <h1>HUTOPIA</h1><br>
+    </header>
+    <div class="wrapper" id="page_content">
+    <div>
+        <div id="breadcrumb">
+            {% set current_path = app.request.get('_route') %}
+            {{ current_path|capitalize }}
+        </div>
+        <br />
+        {% block body %}{% endblock %}
+    </div>
+    </div>
+    {% block javascripts %}{% endblock %}
+    </body>
+</html>

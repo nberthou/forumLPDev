@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste des catégories : </h1>
+    {% if categories is not empty %}
+        {% for categorie in categories %}
+            <p>
+                {{ categorie.title }}
+            </p>
+        {% endfor %}
+    {% else %}
+        <h2>Il n'y a aucune catégorie actuellement.</h2>
+    {% endif %}
+</div>
+{% endblock %}

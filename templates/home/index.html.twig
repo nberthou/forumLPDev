@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div id="home_content">
+        {% if categories %}
+
+            {% for category in categories %}
+                <div class="category">
+                    <div class="category_header">
+                        {{ category.title | capitalize }}
+                    </div>
+                    {% if topics %}
+
+                            {% for topic in topics %}
+                                {% if topic.category.id == category.id %}
+                                    <div class="category_content">
+                                    <div class="topic_content">
+                                        <div class="topic_info">
+                                        <a href="{{ path('topic', {'topic' : topic.title | lower | replace({' ': '-', 'é': 'e', 'è': 'e'})}) }}" class="topic_title">{{ topic.title }}</a> <br/>
+                                        <p class="topic_desc">{{ topic.description }}</p>
+                                        </div>
+                                        <p class="topic_discussions">
+                                            7 discussions
+                                        </p>
+                                        <p class="topic_messages">
+                                            745 messages
+                                        </p>
+                                        <div class="topic_last_message">
+                                            <p>Salut</p>
+                                            <p>Par moi</p>
+                                            <p>Hier</p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                    {% else %}
+                        <div class="category_content">
+                            There is no topic.
+                        </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <br/>
+            {% endfor %}
+
+        {% else %}
+
+            There is no category.
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+.category_header {
+    background: #592EA0;
+    color: white;
+    padding: 10px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.category_content {
+    background: #ECF0F1;
+    width: 100%;
+    padding: 10px;
+}
+
+.topic_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px;
+}
+
+.topic_content p {
+    margin-bottom: 0;
+}
+
+.topic_info {
+    min-width: 30em;
+    max-width: 30em;
+    margin-left: 2em;
+}
+
+.topic_title {
+    color: black;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.topic_desc {
+    font-size: 0.95em;
+    color: #6E6E6E;
+}
+
+.topic_last_message {
+    margin-right: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
