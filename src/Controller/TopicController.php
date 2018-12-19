@@ -46,6 +46,7 @@ class TopicController extends AbstractController
             $topic->setTitle($title);
             $topic->setDescription($description);
             $topic->setCategory($category);
+            $category->addTopic($topic);
             $em = $this->getDoctrine()->getManager();
             $em->persist($topic);
             $em->flush();
@@ -59,7 +60,8 @@ class TopicController extends AbstractController
      * @Route("/{topic}", name="topic")
      */
     public function topic($topic) {
-        $top = $topic;
-        return $this->render('topic/index.html.twig');
+        $top = $this->getDoctrine()->getRepository(Topic::class)->find($topic);
+        return $this->render('topic/index.html.twig', ['topic' => $top]);
     }
+
 }

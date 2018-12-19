@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Post;
+use App\Entity\Thread;
 use App\Entity\Topic;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,9 @@ class HomeController extends AbstractController
         $topics = $this->getDoctrine()->getRepository(Topic::class)->findAll();
         $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-        return $this->render('home/index.html.twig', ['categories' => $categories, 'topics' => $topics, 'posts' => $posts, 'users' => $users]);
+        $threads = $this->getDoctrine()->getRepository(Thread::class)->findAll();
+
+        return $this->render('home/index.html.twig', ['categories' => $categories, 'topics' => $topics, 'posts' => $posts, 'users' => $users, 'threads' => $threads]);
     }
 
 }

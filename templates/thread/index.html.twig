@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/thread.css') }}">
+{% endblock %}
+{% block body %}
+
+    <div id="thread">
+        {% if app.user %}
+            <div class="thread_actions">
+                <button class="btn"><a href="">Nouveau message</a></button>
+                {% if app.user == thread.author %}
+                    <button class="btn"><a href="">Editer le message</a></button>
+                {% endif %}
+            </div>
+            <br/>
+        {% endif %}
+        <div id="thread_title">
+            <h2>{{ thread.title }}</h2>
+        </div>
+        <div id="thread">
+            <p>{{ thread.author.username }}</p>
+            {{ thread.content|raw }}
+            <p>{{  thread.createdAt|date('d/m/y à H:i:s') }}</p>
+            <hr/>
+            {% if thread.replies is not empty %}
+                {% for reply in thread.replies %}
+                    <p>{{ reply.author.username }}</p>
+                    {{ reply.content|raw }}
+                    <p>Le {{ reply.createdAt|date('d/m/y à H:i:s') }}</p>
+                    <hr>
+                {% endfor %}
+            {% endif %}
+            {% if app.user %}
+                {{ form_start(form) }}
+                {{ form_row(form.content) }}
+                <br/>
+                {{ form_end(form) }}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/fosckeditor/adapters/jquery.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('textarea.ckeditor').ckeditor();
+        });
+    </script>
+{% endblock %}

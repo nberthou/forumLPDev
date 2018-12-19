@@ -1,5 +1,49 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/topic.css') }}">
+{% endblock %}
+
 {% block body %}
+
+    <div id="topic">
+        {% if app.user %}
+            <div class="topic_actions">
+                <button class="btn"><a href="{{ path('new_thread', {'topic': topic.id}) }}">Nouvelle discussion</a>
+                </button>
+            </div>
+        {% endif %}
+        <br>
+        <div id="topic_title">
+            <h1>{{ topic.title }}</h1>
+        </div>
+        {% if topic.threads is not empty %}
+            <table class="table table-hover topic_content">
+                <tbody>
+                <tr>
+                    <td><b>Discussion</b></td>
+                    <td><b>Auteur</b></td>
+                    <td><b>Date de création</b></td>
+                </tr>
+                {% for thread in topic.threads %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('thread', {'topic': topic.id, 'thread': thread.id}) }}">{{ thread.title }}</a>
+                        </td>
+                        <td>{{ thread.author.username }}</td>
+                        <td>{{ thread.createdAt|date('d/m/Y') }}</td>
+                        <td>{{ (thread.replies|length + 1) }} message{% if (thread.replies|length + 1) > 1 %}s{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <br/>
+            <h3>
+                Pas de messages dans cette catégorie actuellement.
+            </h3>
+            <a href="{{ path('home') }}">Retour à l'accueil</a>
+        {% endif %}
+    </div>
 
 {% endblock %}

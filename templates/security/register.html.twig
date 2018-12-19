@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Register ! {% endblock %}
+
+{% block body %}
+
+    <form method="post">
+
+        <input type="text" name="username" class="form-control" placeholder="Pseudonyme">
+        <input type="password" name="password" class="form-control" placeholder="Mot de passe">
+        <input type="email" name="email" class="form-control" placeholder="Adresse mail">
+
+        <button type="submit" class="btn btn-info">S'inscrire</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+#topic {
+    text-align: center;
+}
+
+#topic_title {
+    background: #592EA0;
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+#topic_title h1 {
+    margin: 0;
+}
+
+.topic_content .topic_title {
+    background: #592EA0 !important;
+    color: red;
+}
+
+.topic_content tr td {
+    text-align: center;
+}
+
+.topic_actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.topic_actions button {
+    background: #592EA0;
+    border-radius: 10px;
+    font-size: 1.2em;
+}
+
+.topic_actions a, .topic_actions a:hover {
+    color: white;
+    font-weight: bold;
+}
+
+.topic_actions button:last-child {
+    margin-left: 1em;
+}

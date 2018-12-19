@@ -7,53 +7,63 @@
 {% block body %}
 
     <div id="home_content">
-        {% if categories %}
+    {% if app.user %}
+        <div class="home_actions">
+            <button class="btn"><a href="{{ path('new_category') }}">Nouvelle catégorie</a></button>
+            <button class="btn"><a href="{{ path('new_topic') }}">Nouveau sujet de discussion</a></button>
+        </div>
+    {% endif %}
+    <br>
+    {% if categories %}
+        {% for category in categories %}
+            <div class="category">
+            <div class="category_header">
+                {{ category.title | capitalize }}
+            </div>
+            {% if topics %}
 
-            {% for category in categories %}
-                <div class="category">
-                    <div class="category_header">
-                        {{ category.title | capitalize }}
-                    </div>
-                    {% if topics %}
+                {% for topic in topics %}
 
-                            {% for topic in topics %}
-                                {% if topic.category.id == category.id %}
-                                    <div class="category_content">
-                                    <div class="topic_content">
-                                        <div class="topic_info">
-                                        <a href="{{ path('topic', {'topic' : topic.title | lower | replace({' ': '-', 'é': 'e', 'è': 'e'})}) }}" class="topic_title">{{ topic.title }}</a> <br/>
-                                        <p class="topic_desc">{{ topic.description }}</p>
-                                        </div>
-                                        <p class="topic_discussions">
-                                            7 discussions
-                                        </p>
-                                        <p class="topic_messages">
-                                            745 messages
-                                        </p>
-                                        <div class="topic_last_message">
-                                            <p>Salut</p>
-                                            <p>Par moi</p>
-                                            <p>Hier</p>
-                                        </div>
-                                    </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                    {% else %}
+
+
+                    {% if topic.category.id == category.id %}
                         <div class="category_content">
-                            There is no topic.
-                        </div>
+                            <div class="home_topic_content">
+                                <div class="home_topic_info">
+                                    <a href="{{ path('topic', {'topic' : topic.id}) }}"
+                                       class="home_topic_title">{{ topic.title }}</a> <br/>
+                                    <p class="topic_desc">{{ topic.description }}</p>
+                                </div>
+                                <p class="home_topic_discussions">
+                                    {{ topic.threads|length }}
+                                    discussion{% if topic.threads|length > 1 %}s{% endif %}
+                                </p>
+                                <p class="home_topic_messages">
+                                </p>
+                                <div class="home_topic_last_message">
+                                    <p>Salut</p>
+                                    <p>Par moi</p>
+                                    <p>Hier</p>
+                                </div>
+                            </div>
                         </div>
                     {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="category_content">
+                    There is no topic.
                 </div>
-                <br/>
-            {% endfor %}
+                </div>
+            {% endif %}
+            </div>
+            <br/>
+        {% endfor %}
 
-        {% else %}
+    {% else %}
 
-            There is no category.
+        There is no category.
 
-        {% endif %}
+    {% endif %}
 
     </div>
 
